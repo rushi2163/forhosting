@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-parent',
@@ -7,11 +8,10 @@ import { ChildComponent } from '../child/child.component';
   styleUrls: ['./parent.component.css']
 })
 export class ParentComponent {
+  constructor(private service:ServiceService ){}
   // @ViewChild(ChildComponent) demo :ChildComponent=new ChildComponent;
- data="dynamic data"
- show=true
- calldata(){
-  this.data="changed data"
-  this.show=false
- }
+  data:any;
+  testConnection(){
+    this.service.testConnection().subscribe((res)=>{this.data=res})
+  }
 }
